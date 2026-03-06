@@ -1,274 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Michelo Muntanga Muhyila - Business Card</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Golden Jubilee | Evans Mbeba</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --gold: #c5a059;
+            --light-gold: #e2c275;
+            --deep-black: #050505;
+            --soft-white: #f4f4f4;
+            --overlay: rgba(0, 0, 0, 0.75);
+        }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #e8f5e9, #f3fff6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      
-    }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Splash Screen */
-    #splash {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      animation: fadeOut 1s ease-in-out 2s forwards;
-    }
+        body {
+            background-color: var(--deep-black);
+            color: var(--soft-white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-    #splash img {
-      height: 100px;
-      opacity: 0;
-      transform: scale(0.7);
-      animation: logoAnim 1.5s ease-in-out forwards;
-    }
+        .bg-mesh {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(197, 160, 89, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(197, 160, 89, 0.1) 0%, transparent 40%);
+            z-index: -1;
+        }
 
-    @keyframes logoAnim {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
+        .gold-text {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+        }
 
-    .business-card {
-      display: none;
-      flex-direction: row;
-      max-width: 960px;
-      width: 100%;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #ffffff;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-      transition: 0.3s ease;
-    }
+        .title-wrapper h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -2px;
+        }
 
-    .business-card.show {
-      display: flex;
-      animation: fadeIn 0.8s ease-in-out;
-    }
+        .jubilee-tag {
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        .content-section {
+            max-width: 1000px;
+            margin: -100px auto 100px;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 4rem 2rem;
+            border-radius: 4px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+            text-align: center;
+        }
 
-    .left, .right {
-      padding: 36px;
-      flex: 1;
-    }
+        .grid-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
 
-    .left {
-      background: linear-gradient(135deg, #1b5e20, #388e3c);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+        .detail-item h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
 
-    .left h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .detail-item p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
 
-    .position {
-      font-size: 16px;
-      font-weight: 500;
-      opacity: 0.9;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .dress-code-box {
+            background: linear-gradient(135deg, #111 0%, #000 100%);
+            padding: 2rem;
+            border: 1px solid var(--gold);
+            margin: 2rem 0;
+            display: inline-block;
+            border-radius: 8px;
+        }
 
-    .slogan {
-      font-size: 14px;
-      font-style: italic;
-      margin-top: 30px;
-      opacity: 0.85;
-    }
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 3rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--gold);
+        }
 
-    .right {
-      background: linear-gradient(to bottom right, #ffffff, #f9fdfb);
-      color: #333;
-    }
+        .rsvp-container {
+            margin-top: 4rem;
+        }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+        .phone-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
 
-    .logo img {
-      height: 70px;
-    }
+        .btn-rsvp {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
 
-    .logo h3 {
-      font-size: 18px;
-      margin: 0;
-      font-weight: 600;
-      color: #1b5e20;
-    }
+        .btn-rsvp:hover {
+            background: var(--gold);
+            color: var(--deep-black);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+        }
 
-    .right p {
-      margin: 12px 0;
-      font-size: 14px;
-      line-height: 1.6;
-    }
+        #countdown {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-top: 2rem;
+        }
 
-    .right p strong {
-      color: #2e7d32;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
+        /* --- FLIP CARD ANIMATION --- */
+        .flip-section {
+            margin: 100px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            perspective: 1200px;
+        }
 
-    a {
-      color: #1b5e20;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
+        .flip-card {
+            width: 320px;
+            height: 220px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
 
-    a:hover {
-      color: #33691e;
-      text-decoration: underline;
-    }
+        .flip-card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-    i {
-      color: #1b5e20;
-    }
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 1px solid var(--gold);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 4px;
+        }
 
-    /* Responsive Layout */
-    @media (max-width: 768px) {
-      .business-card {
-        flex-direction: column;
-      }
+        .face-front {
+            background: #111;
+            color: var(--gold);
+        }
 
-      .left {
-        text-align: center;
-        border-bottom: 1px solid #ddd;
-      }
+        .face-back {
+            background: #fdfdfd;
+            color: #111;
+            transform: rotateY(180deg);
+            text-align: left;
+            align-items: flex-start;
+        }
 
-      .logo {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
+        .dl-trigger {
+            margin-top: 15px;
+            display: block;
+            width: 100%;
+            background: var(--deep-black);
+            color: var(--gold);
+            text-align: center;
+            padding: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border: 1px solid var(--gold);
+            cursor: pointer;
+        }
 
-    @media (max-width: 480px) {
-      .left h2 {
-        font-size: 18px;
-      }
+        .is-flipped { transform: rotateY(180deg); }
 
-      .position,
-      .right p {
-        font-size: 13px;
-      }
+        /* PDF Layout Container (Hidden from view) */
+        #pdf-template {
+            display: none;
+        }
 
-      .slogan {
-        font-size: 12px;
-      }
-    }
-  </style>
+        @media (max-width: 768px) {
+            .content-section { margin-top: 0; padding: 2rem 1rem; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Splash Screen -->
-  <div id="splash">
-    <img src="https://cdn.greatzambiajobs.com/jsjobsdata/data/employer/comp_6704/logo/zanl.jpeg" alt="Zambia Emblem">
-  </div>
+    <div class="bg-mesh"></div>
 
-  <!-- Business Card -->
-  <div class="business-card" id="profileCard">
-    <div class="left">
-      <div>
-        <h2><i class="fas fa-user"></i> Michelo Muntanga Muhyila</h2>
-        <p class="position"><i class="fas fa-briefcase"></i> Human Resource & Administration Manager</p>
-      </div>
-      <p class="slogan">"Working towards an indigenous legal system"</p>
-    </div>
-    <div class="right">
-      <div class="logo">
-        <img src="https://cdn.greatzambiajobs.com/jsjobsdata/data/employer/comp_6704/logo/zanl.jpeg" alt="Zambia Emblem">
-        <h3><i class="fas fa-landmark"></i> Zambia Law Development Commission</h3>
-      </div>
+    <section class="hero">
+        <p class="jubilee-tag">Golden Jubilee Lunch</p>
+        <div class="title-wrapper">
+            <h1 class="gold-text">Evans Mbeba</h1>
+        </div>
+        <div id="countdown">Loading...</div>
+    </section>
 
-      <p>
-        <strong><i class="fas fa-map-marker-alt"></i> Address:</strong>
-        Plot 26F Cheetah Road, Kabulonga<br>
-        P.O. Box 34670
-      </p>
+    <main class="content-section">
+        <p style="font-size: 1.4rem; font-style: italic; color: var(--gold); margin-bottom: 3rem;">
+            "Celebrating fifty years of excellence, family, and grace."
+        </p>
 
-      <p>
-        <strong><i class="fas fa-phone-alt"></i> Phones:</strong>
-        +260 955 801 983<br>
-        +260 966 801 983<br>
-        +260 978 519 130
-      </p>
+        <div class="grid-details">
+            <div class="detail-item">
+                <h3>When</h3>
+                <p>Saturday, 28th March 2026</p>
+                <p>Commencing at 12:30 PM</p>
+            </div>
+            <div class="detail-item">
+                <h3>Where</h3>
+                <p>Eagles View Event Centre</p>
+                <p>Lusaka, Zambia</p>
+            </div>
+            <div class="detail-item">
+                <h3>Dress Code</h3>
+                <div class="dress-code-box">
+                    <span style="color: #fff">BLACK</span> & <span style="color: var(--gold)">GOLD</span>
+                </div>
+            </div>
+        </div>
 
-      <p>
-        <strong><i class="fas fa-envelope"></i> Emails:</strong>
-        <a href="mailto:muhyilamichelo@gmail.com"><i class="far fa-envelope"></i> muhyilamichelo@gmail.com</a><br>
-        <a href="mailto:michelomuhyila@yahoo.com"><i class="far fa-envelope"></i> michelomuhyila@yahoo.com</a><br>
-        <a href="mailto:zambialawdevelopmentcommission@gmail.com">zambialawdevelopmentcommission@gmail.com</a>
-      </p>
+        <hr style="border: 0; border-top: 1px solid rgba(197, 160, 89, 0.2); margin: 3rem 0;">
 
-      <p>
-        <strong><i class="fas fa-hashtag"></i> Socials:</strong>
-        <i class="fab fa-facebook"></i> @Zambia Law Development Commission<br>
-        <i class="fab fa-twitter"></i> <a href="#">@zambia_law</a><br>
-        <i class="fas fa-globe"></i> <a href="http://www.zambialawdevelopment.org" target="_blank">www.zambialawdevelopment.org</a><br>
-        <i class="fas fa-globe"></i> <a href="http://www.zldc.org" target="_blank">www.zldc.org</a>
-      </p>
-    </div>
-  </div>
+        <div class="gifting">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold);">Gifting</h3>
+            <p style="margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                Your presence is our greatest gift. However, should you wish to honor Evans with a token, 
+                a monetary gift would be sincerely appreciated.
+            </p>
+        </div>
 
-  <script>
-    // Show profile after splash
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.getElementById('profileCard').classList.add('show');
-      }, 2200); // After splash animation completes
-    });
-  </script>
+        <div class="map-container">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                scrolling="no" 
+                marginheight="0" 
+                marginwidth="0" 
+                src="https://maps.google.com/maps?q=Eagles%20View%20Event%20Centre%20Lusaka&t=&z=13&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </div>
+
+        <div class="rsvp-container">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem;">RSVP</h3>
+            <p style="opacity: 0.7;">Please confirm your attendance</p>
+            <div class="phone-links">
+                <a href="tel:0977409815" class="btn-rsvp">0977 409 815</a>
+                <a href="tel:0977431614" class="btn-rsvp">0977 431 614</a>
+                <a href="tel:0973203537" class="btn-rsvp">0973 203 537</a>
+            </div>
+        </div>
+
+        <div class="flip-section" id="flip-trigger">
+            <div class="flip-card">
+                <div class="flip-card-inner" id="card-inner">
+                    <div class="face face-front">
+                        <h2 style="font-family: 'Playfair Display', serif; letter-spacing: 4px;">INVITATION</h2>
+                    </div>
+                    <div class="face face-back" id="capture-area">
+                        <p style="color: #c5a059; font-weight: bold; margin-bottom: 10px; font-family: 'Inter', sans-serif;">JUBILEE SUMMARY</p>
+                        <p style="font-size: 0.8rem; line-height: 1.5; font-family: 'Inter', sans-serif;">
+                            <strong>Evans Mbeba</strong><br>
+                            28 March 2026 | 12:30 PM<br>
+                            Eagles View, Lusaka<br>
+                            Dress: Black & Gold
+                        </p>
+                        <button onclick="downloadPDF()" class="dl-trigger">DOWNLOAD INVITATION</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="text-align: center; padding: 4rem; opacity: 0.5; font-size: 0.8rem; letter-spacing: 2px;">
+        EST. 1976 — 2026 | THE GOLDEN JUBILEE
+    </footer>
+
+    <script>
+        // PDF Download Function
+        function downloadPDF() {
+            const element = document.getElementById('capture-area');
+            const button = document.querySelector('.dl-trigger');
+            
+            // Hide button temporarily so it doesn't appear in the PDF
+            button.style.visibility = 'hidden';
+
+            const opt = {
+                margin:       1,
+                filename:     'Evans_Mbeba_Jubilee_Invite.pdf',
+                image:        { type: 'jpeg', quality: 1 },
+                html2canvas:  { scale: 2, backgroundColor: '#ffffff' },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                button.style.visibility = 'visible';
+            });
+        }
+
+        // Intersection Observer for Scroll Trigger
+        const card = document.getElementById('card-inner');
+        const trigger = document.getElementById('flip-trigger');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    card.classList.add('is-flipped');
+                }
+            });
+        }, { threshold: 0.8 });
+
+        observer.observe(trigger);
+
+        // Precision Countdown
+        const targetDate = new Date("March 28, 2026 12:30:00").getTime();
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            const d = Math.floor(gap / day), h = Math.floor((gap % day) / hour), m = Math.floor((gap % hour) / minute), s = Math.floor((gap % minute) / second);
+            document.getElementById("countdown").innerText = `${d}d : ${h}h : ${m}m : ${s}s`;
+        };
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
