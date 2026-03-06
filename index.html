@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Golden Jubilee | Evans Mbeba</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
             --gold: #c5a059;
@@ -203,7 +202,7 @@
             align-items: flex-start;
         }
 
-        .dl-trigger {
+        .cal-trigger {
             margin-top: 15px;
             display: block;
             width: 100%;
@@ -216,20 +215,15 @@
             font-size: 0.8rem;
             border: 1px solid var(--gold);
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .cal-trigger:hover {
+            background: var(--gold);
+            color: white;
         }
 
         .is-flipped { transform: rotateY(180deg); }
-
-        /* PDF Helper: To fix the blank page issue by providing a flat capture area */
-        #pdf-export-container {
-            position: fixed;
-            left: -9999px;
-            top: 0;
-            width: 320px;
-            background: white;
-            padding: 20px;
-            color: black;
-        }
 
         @media (max-width: 768px) {
             .content-section { margin-top: 0; padding: 2rem 1rem; }
@@ -244,9 +238,8 @@
         <p class="jubilee-tag">Golden Jubilee Lunch</p>
         <div class="title-wrapper">
             <h1 class="gold-text">Evans Mbeba </h1>
-<p class="jubilee-tag">@ 50years</p>
+            <p class="jubilee-tag">-- @ 50years --</p>
         </div>
-
         <div id="countdown">Loading...</div>
     </section>
 
@@ -257,12 +250,12 @@
 
         <div class="grid-details">
             <div class="detail-item">
-                <h3>When</h3>
+                <h3>Date</h3>
                 <p>Saturday, 28th March 2026</p>
                 <p>Commencing at 12:30 PM</p>
             </div>
             <div class="detail-item">
-                <h3>Where</h3>
+                <h3>Location</h3>
                 <p>Eagles View Event Centre</p>
                 <p>Lusaka, Zambia</p>
             </div>
@@ -285,7 +278,7 @@
         </div>
 
         <div class="map-container">
-            <iframe 
+             <iframe 
                 width="100%" 
                 height="100%" 
                 frameborder="0" 
@@ -313,54 +306,61 @@
                         <h2 style="font-family: 'Playfair Display', serif; letter-spacing: 4px;">INVITATION</h2>
                     </div>
                     <div class="face face-back" id="capture-area">
-                        <p style="color: #c5a059; font-weight: bold; margin-bottom: 10px; font-family: 'Inter', sans-serif;">JUBILEE SUMMARY</p>
+                        <p style="color: #c5a059; font-weight: bold; margin-bottom: 10px; font-family: 'Inter', sans-serif;">INVITATION SUMMARY</p>
                         <p style="font-size: 0.8rem; line-height: 1.5; font-family: 'Inter', sans-serif;">
-                            <strong>Evans Mbeba</strong><br>
-                            28 March 2026 | 12:30 PM<br>
-                            Eagles View, Lusaka<br>
-                            Dress: Black & Gold
+                            <strong>Evans Mbeba's Golden Jubilee</strong><br>
+                        Date: 28 March 2026 | 12:30 PM<br>
+                            Location: Eagles View, Lusaka<br>
+                            Dress code: Black & Gold
                         </p>
-                        <button onclick="downloadPDF()" class="dl-trigger">DOWNLOAD INVITATION</button>
+                        <button onclick="addToCalendar()" class="cal-trigger">SAVE TO CALENDAR</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <div id="pdf-export-container"></div>
-
     <footer style="text-align: center; padding: 4rem; opacity: 0.5; font-size: 0.8rem; letter-spacing: 2px;">
         EST. 1976 — 2026 | THE GOLDEN JUBILEE
     </footer>
 
     <script>
-        // PDF Download Function Fixed
-        function downloadPDF() {
-            const source = document.getElementById('capture-area');
-            const exportContainer = document.getElementById('pdf-export-container');
-            
-            // Clone the content into a hidden, non-transformed container to avoid blank PDF
-            const clone = source.cloneNode(true);
-            const buttonInClone = clone.querySelector('.dl-trigger');
-            if (buttonInClone) buttonInClone.remove(); // Don't include button in PDF
-            
-            exportContainer.innerHTML = '';
-            exportContainer.appendChild(clone);
-
-            const opt = {
-                margin:       [0.5, 0.5],
-                filename:     'Evans_Mbeba_Jubilee_Invite.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 3, backgroundColor: '#ffffff', useCORS: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        /**
+         * Generates and downloads an .ics file
+         * This format is supported by iOS, Android, and Desktop
+         */
+        function addToCalendar() {
+            const event = {
+                title: "Evans Mbeba - The Golden Jubilee Lunch",
+                description: "Celebrating 50 years of Evans Mbeba. Dress Code: Black & Gold.",
+                location: "Eagles View Event Centre, Lusaka, Zambia",
+                begin: "20260328T123000", // YYYYMMDDTHHMMSS
+                end: "20260328T170000"
             };
 
-            html2pdf().set(opt).from(exportContainer).save().then(() => {
-                exportContainer.innerHTML = ''; // Clean up
-            });
+            const icsData = [
+                "BEGIN:VCALENDAR",
+                "VERSION:2.0",
+                "BEGIN:VEVENT",
+                `DTSTART:${event.begin}`,
+                `DTEND:${event.end}`,
+                `SUMMARY:${event.title}`,
+                `DESCRIPTION:${event.description}`,
+                `LOCATION:${event.location}`,
+                "END:VEVENT",
+                "END:VCALENDAR"
+            ].join("\n");
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Evans_Mbeba_Jubilee.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
-        // Intersection Observer for Scroll Trigger (Turn in / Turn out)
+        // Intersection Observer for Scroll Trigger
         const card = document.getElementById('card-inner');
         const trigger = document.getElementById('flip-trigger');
 
@@ -369,7 +369,6 @@
                 if (entry.isIntersecting) {
                     card.classList.add('is-flipped');
                 } else {
-                    // Turn back to covered side when moved out of screen
                     card.classList.remove('is-flipped');
                 }
             });
@@ -383,6 +382,12 @@
             const now = new Date().getTime();
             const gap = targetDate - now;
             const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            
+            if (gap < 0) {
+                document.getElementById("countdown").innerText = "THE CELEBRATION HAS BEGUN";
+                return;
+            }
+
             const d = Math.floor(gap / day), h = Math.floor((gap % day) / hour), m = Math.floor((gap % hour) / minute), s = Math.floor((gap % minute) / second);
             document.getElementById("countdown").innerText = `${d}d : ${h}h : ${m}m : ${s}s`;
         };
