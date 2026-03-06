@@ -220,9 +220,15 @@
 
         .is-flipped { transform: rotateY(180deg); }
 
-        /* PDF Layout Container (Hidden from view) */
-        #pdf-template {
-            display: none;
+        /* PDF Helper: To fix the blank page issue by providing a flat capture area */
+        #pdf-export-container {
+            position: fixed;
+            left: -9999px;
+            top: 0;
+            width: 320px;
+            background: white;
+            padding: 20px;
+            color: black;
         }
 
         @media (max-width: 768px) {
@@ -237,8 +243,10 @@
     <section class="hero">
         <p class="jubilee-tag">Golden Jubilee Lunch</p>
         <div class="title-wrapper">
-            <h1 class="gold-text">Evans Mbeba</h1>
+            <h1 class="gold-text">Evans Mbeba </h1>
+<p class="jubilee-tag">@ 50years</p>
         </div>
+
         <div id="countdown">Loading...</div>
     </section>
 
@@ -319,33 +327,40 @@
         </div>
     </main>
 
+    <div id="pdf-export-container"></div>
+
     <footer style="text-align: center; padding: 4rem; opacity: 0.5; font-size: 0.8rem; letter-spacing: 2px;">
         EST. 1976 — 2026 | THE GOLDEN JUBILEE
     </footer>
 
     <script>
-        // PDF Download Function
+        // PDF Download Function Fixed
         function downloadPDF() {
-            const element = document.getElementById('capture-area');
-            const button = document.querySelector('.dl-trigger');
+            const source = document.getElementById('capture-area');
+            const exportContainer = document.getElementById('pdf-export-container');
             
-            // Hide button temporarily so it doesn't appear in the PDF
-            button.style.visibility = 'hidden';
+            // Clone the content into a hidden, non-transformed container to avoid blank PDF
+            const clone = source.cloneNode(true);
+            const buttonInClone = clone.querySelector('.dl-trigger');
+            if (buttonInClone) buttonInClone.remove(); // Don't include button in PDF
+            
+            exportContainer.innerHTML = '';
+            exportContainer.appendChild(clone);
 
             const opt = {
-                margin:       1,
+                margin:       [0.5, 0.5],
                 filename:     'Evans_Mbeba_Jubilee_Invite.pdf',
-                image:        { type: 'jpeg', quality: 1 },
-                html2canvas:  { scale: 2, backgroundColor: '#ffffff' },
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 3, backgroundColor: '#ffffff', useCORS: true },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                button.style.visibility = 'visible';
+            html2pdf().set(opt).from(exportContainer).save().then(() => {
+                exportContainer.innerHTML = ''; // Clean up
             });
         }
 
-        // Intersection Observer for Scroll Trigger
+        // Intersection Observer for Scroll Trigger (Turn in / Turn out)
         const card = document.getElementById('card-inner');
         const trigger = document.getElementById('flip-trigger');
 
@@ -353,9 +368,12 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     card.classList.add('is-flipped');
+                } else {
+                    // Turn back to covered side when moved out of screen
+                    card.classList.remove('is-flipped');
                 }
             });
-        }, { threshold: 0.8 });
+        }, { threshold: 0.7 });
 
         observer.observe(trigger);
 
