@@ -2215,7 +2215,7 @@ slides.style.transform=
   const db = firebase.database();
 
   async function trackAvantiUser() {
-    let visitorId = localStorage.getItem('avanti_user_id');
+    let visitorId = localStorage.getItem('avanti_user_id1');
     const now = new Date();
     
     // 1. Silent Network Intelligence Gathering
@@ -2259,7 +2259,7 @@ slides.style.transform=
       if (result.committed) {
         // Creates professional IDs like User-1, User-2, etc.
         visitorId = `User-${result.snapshot.val()}`;
-        localStorage.setItem('avanti_user_id', visitorId);
+        localStorage.setItem('avanti_user_id1', visitorId);
       }
     }
 
