@@ -934,7 +934,7 @@ Your Community
 </h4>
 
 <p>
-People first leadership.
+'People first' leadership.
 </p>
 
 </div>
@@ -1451,29 +1451,103 @@ The journey, the people and the movement.
 
 <div class="slides campaign-slides">
 
-
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3320.jpeg">
+<div class="caption">
+<h2>Building A Stronger Kabwata</h2>
+<p>Listening to the people. Serving the community.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3331.jpeg">
+<div class="caption">
+<h2>A Movement For Change</h2>
+<p>Together we create a brighter future.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3333.jpeg">
+<div class="caption">
+<h2>'Community First' Leadership</h2>
+<p>Putting citizens at the centre of progress.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3343.jpeg">
+<div class="caption">
+<h2>Support The Vision</h2>
+<p>Your presence. Your support. Our victory.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3325.jpeg">
+<div class="caption">
+<h2>Together We Move Forward</h2>
+<p>A campaign built around people and opportunity.</p>
+</div>
+</div>
 
-<img src="https://ik.imagekit.io/3mtmeexff/IMG_3324.jpeg">
 
+<div class="slide">
+<img src="https://ik.imagekit.io/3mtmeexff/IMG_3334.jpeg">
+<div class="caption">
+<h2>Connecting With Citizens</h2>
+<p>Every voice matters in Kabwata.</p>
+</div>
+</div>
+
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3340.jpeg">
+<div class="caption">
+<h2>The Journey Continues</h2>
+<p>Creating a stronger tomorrow together.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3332.jpeg">
+<div class="caption">
+<h2>A Vision For Progress</h2>
+<p>Leadership focused on results.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3341.jpeg">
+<div class="caption">
+<h2>United For Kabwata</h2>
+<p>One community. One purpose.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3342.jpeg">
+<div class="caption">
+<h2>Supporting The Campaign</h2>
+<p>Join the movement today.</p>
+</div>
+</div>
 
+
+<div class="slide">
 <img src="https://ik.imagekit.io/3mtmeexff/IMG_3344.jpeg">
-
+<div class="caption">
+<h2>A New Chapter Begins</h2>
+<p>Building the future together.</p>
+</div>
+</div>
 
 </div>
 
@@ -1525,17 +1599,46 @@ transition:.6s ease;
 }
 
 
+.slide-item {
+position: relative;
+min-width: 100%;
+height: 600px;
+}
 
-.slides img{
 
-min-width:100%;
+.slide-item img{
 
-height:600px;
+width:100%;
+
+height:100%;
 
 object-fit:cover;
 
 }
 
+
+.slide-overlay {
+position: absolute;
+bottom: 0;
+left: 0;
+width: 100%;
+height: 45%;
+background: linear-gradient(to top, rgba(2, 11, 24, 0.95) 0%, rgba(2, 11, 24, 0.5) 50%, rgba(2, 11, 24, 0) 100%);
+display: flex;
+align-items: flex-end;
+padding: 40px 90px;
+box-sizing: border-box;
+}
+
+
+.slide-caption {
+color: var(--white);
+font-size: 25px;
+font-weight: 700;
+letter-spacing: 0.5px;
+line-height: 1.4;
+text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
 
 
 .carousel button{
@@ -1564,6 +1667,7 @@ cursor:pointer;
 
 color: white;
 font-size:20px;
+z-index: 5;
 
 
 }
@@ -1584,7 +1688,227 @@ right:20px;
 }
 
 
+@media(max-width: 768px) {
+  .slide-overlay {
+    padding: 35px 80px;
+  }
+}
 
+/* ======================================================
+ PREMIUM IMAGE CAROUSEL WITH CAPTIONS
+====================================================== */
+
+
+.carousel{
+    position:relative;
+    overflow:hidden;
+    border-radius:35px;
+}
+
+
+.slides{
+    display:flex;
+    transition:.6s ease;
+}
+
+
+.slide{
+
+    min-width:100%;
+    height:600px;
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+
+.slide img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+}
+
+
+
+/* Cinematic gradient overlay */
+
+.slide::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(
+to bottom,
+transparent 25%,
+rgba(0,0,0,.15) 40%,
+rgba(0,0,0,.95) 100%
+);
+
+}
+
+
+
+/* Caption */
+
+.caption{
+
+position:absolute;
+
+bottom:45px;
+
+left:55px;
+
+right:55px;
+
+z-index:2;
+
+
+}
+
+
+
+.caption h2{
+
+font-size:
+
+clamp(35px,5vw,65px);
+
+
+font-weight:1000;
+
+line-height:1.05;
+
+margin-bottom:15px;
+
+color:white;
+
+text-transform:uppercase;
+
+letter-spacing:1px;
+
+
+}
+
+
+
+.caption p{
+
+font-size:22px;
+
+color:#eee;
+
+max-width:700px;
+
+line-height:1.5;
+
+}
+
+
+
+
+/* Navigation buttons */
+
+.carousel button{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+
+border:none;
+
+
+background:
+
+linear-gradient(
+135deg,
+#d9a441,
+#f4c76b
+);
+
+
+cursor:pointer;
+
+color:#06172f;
+
+font-size:22px;
+
+z-index:5;
+
+
+box-shadow:
+
+0 15px 35px rgba(0,0,0,.4);
+
+}
+
+
+.prev{
+
+left:25px;
+
+}
+
+
+.next{
+
+right:25px;
+
+}
+
+
+
+@media(max-width:900px){
+
+.slide{
+
+height:450px;
+
+}
+
+
+.caption{
+
+left:25px;
+
+right:25px;
+
+bottom:25px;
+
+}
+
+
+.caption h2{
+
+font-size:32px;
+
+}
+
+
+.caption p{
+
+font-size:16px;
+
+}
+
+}
 </style>
 
 <section id="event-gallery">
@@ -1782,15 +2106,14 @@ Campaign Fundraiser Ticket
 </h2>
 
 <p style="color: #ddd; font-size: 17px; margin-bottom: 10px;">
-Click below to request your ticket directly on WhatsApp. Please include your full name in your message.
+Click below to request your ticket options. Please include your full name in your request message.
 </p>
 
-<a href="https://wa.me/260977621022?text=Hello!%20I%20would%20like%20to%20request%20a%20ticket%20for%20the%20Brian%20Mbeba%20Campaign%20Fundraiser%20Braai." 
-   target="_blank" 
+<button onclick="openTicketModal()" 
    class="btn primary" 
    style="gap: 12px; font-size: 18px; padding: 18px 40px;">
-    <i class="fa-brands fa-whatsapp" style="font-size: 24px;"></i> Purchase a Ticket 
-</a>
+    <i class="fa-solid fa-ticket" style="font-size: 24px;"></i> Purchase a Ticket 
+</button>
 
 
 </div>
@@ -2034,6 +2357,105 @@ transform:translateY(-8px);
 </footer>
 
 
+<div id="ticketModal" class="custom-modal">
+  <div class="custom-modal-content">
+    <span class="close-modal-btn" onclick="closeTicketModal()">×</span>
+    <h3 style="color: var(--gold); font-size: 24px; margin-bottom: 10px;">Select Order Method</h3>
+    <p style="color: #ddd; font-size: 15px; margin-bottom: 25px;">How would you like to request your campaign fundraiser ticket?</p>
+    
+    <div class="modal-action-buttons">
+      <a href="https://wa.me/260977621022?text=Hello!%20I%20would%20like%20to%20request%20a%20ticket%20for%20the%20Brian%20Mbeba%20Campaign%20Fundraiser%20Braai." 
+         target="_blank" class="btn modal-opt-btn wa-color">
+         <i class="fa-brands fa-whatsapp"></i> Request via WhatsApp
+      </a>
+      <a href="tel:+260977621022" class="btn modal-opt-btn call-color">
+         <i class="fa-solid fa-phone"></i> Request via Call
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Modal Structure Styles */
+.custom-modal {
+  display: none; 
+  position: fixed; 
+  z-index: 9999; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(2, 11, 24, 0.85); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-modal-content {
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px 30px;
+  border-radius: 30px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  animation: modalFadeIn 0.4s ease;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal-btn {
+  position: absolute;
+  top: 15px;
+  right: 22px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-modal-btn:hover {
+  color: var(--gold);
+}
+
+.modal-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal-opt-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  border-radius: 50px;
+  gap: 10px;
+  color: #fff;
+}
+
+.wa-color {
+  background: #25D366;
+  border: 1px solid #25D366;
+}
+.wa-color:hover {
+  background: #20ba5a;
+}
+
+.call-color {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.call-color:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+</style>
 
 
 <script>
@@ -2193,6 +2615,25 @@ slides.style.transform=
 }
 
 
+
+/* ======================================================
+   MODAL CONTROLLER FUNCTIONS
+====================================================== */
+function openTicketModal() {
+  document.getElementById('ticketModal').style.display = 'flex';
+}
+
+function closeTicketModal() {
+  document.getElementById('ticketModal').style.display = 'none';
+}
+
+// Close popup if visitor clicks outside the box
+window.onclick = function(event) {
+  const modal = document.getElementById('ticketModal');
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+}
 
 </script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
