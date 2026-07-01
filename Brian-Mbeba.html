@@ -1197,6 +1197,7 @@ Monday 6th July 2026
 
 
 
+
 <div class="detail">
 
 <i class="fa-solid fa-clock"></i>
@@ -1222,7 +1223,7 @@ Time
 
 <i class="fa-solid fa-location-dot"></i>
 
-<div>
+<div style="margin-left: 10px;">
 
 <h4>
 Location
@@ -1238,7 +1239,23 @@ Lilayi South
 
 </div>
 
+<div class="detail">
 
+<i class="fa-solid fa-martini-glass-citrus"></i>
+
+<div>
+
+<h4>
+Cash Bar
+</h4>
+
+<p>
+A fully stocked cash bar will be available throughout the fundraiser.
+</p>
+
+</div>
+
+</div>
 
 </div>
 
@@ -2038,7 +2055,56 @@ src="https://www.google.com/maps?q=SAMIS%20SAMIS&t=k&output=embed"
 
 </section>
 
+<section id="cash-bar-gallery">
 
+
+<div class="section-title">
+
+<h2>
+Cash Bar <span>Experience</span>
+</h2>
+
+
+<p>
+Enjoy refreshments, networking and a premium social atmosphere.
+</p>
+
+</div>
+
+
+
+<div class="bar-deck">
+
+
+<div class="bar-card">
+<img src="https://ik.imagekit.io/3mtmeexff/IMG_3358.jpeg">
+</div>
+
+
+<div class="bar-card">
+<img src="https://ik.imagekit.io/3mtmeexff/IMG_3356.jpeg">
+</div>
+
+
+<div class="bar-card">
+<img src="https://ik.imagekit.io/3mtmeexff/IMG_3355.jpeg">
+</div>
+
+
+<div class="bar-card">
+<img src="https://ik.imagekit.io/3mtmeexff/IMG_3357.jpeg">
+</div>
+
+
+<div class="bar-card">
+<img src="https://ik.imagekit.io/3mtmeexff/IMG_3337.jpeg">
+</div>
+
+
+</div>
+
+
+</section>
 
 <style>
 
@@ -2071,6 +2137,168 @@ border:0;
 
 }
 
+/* ======================================================
+ CASH BAR COLLAGE DECK
+====================================================== */
+
+
+.price-badge{
+
+width:140px;
+height:140px;
+
+border-radius:50%;
+
+background:
+linear-gradient(
+135deg,
+var(--gold),
+var(--gold-light)
+);
+
+color:#06172f;
+
+display:flex;
+flex-direction:column;
+
+justify-content:center;
+align-items:center;
+
+margin-bottom:20px;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.4);
+
+}
+
+
+.price-badge i{
+
+font-size:30px;
+
+}
+
+
+.price-badge span{
+
+font-size:35px;
+
+font-weight:1000;
+
+}
+
+
+.price-badge small{
+
+font-weight:700;
+
+}
+
+
+
+/* ======================================================
+ CASH BAR COLLAGE GRID & SCROLL UNFURL (HIGH ROTATION)
+====================================================== */
+
+.bar-deck {
+  display: grid;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0;
+  gap: 35px; /* Increased gap to prevent rotated corners from overlapping unpleasantly */
+  box-sizing: border-box;
+  padding: 0;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 300px 300px;
+  
+  grid-template-areas: 
+    "card1 card2 card3 card3"
+    "card1 card4 card5 card5";
+}
+
+.bar-card:nth-child(1) { grid-area: card1; }
+.bar-card:nth-child(2) { grid-area: card2; }
+.bar-card:nth-child(3) { grid-area: card3; }
+.bar-card:nth-child(4) { grid-area: card4; }
+.bar-card:nth-child(5) { grid-area: card5; }
+
+.bar-card {
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  height: 100%;
+  
+  /* Retaining the smooth, weighted snapping curve */
+  transition: 
+    transform 1.4s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 1s ease;
+    
+  transform-origin: center center;
+}
+
+.bar-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ======================================================
+ STATE 1: DEFAULT / SCROLLED OUT (Smaller & High Rotation)
+====================================================== */
+.bar-deck:not(.spread) .bar-card {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Rotations increased up to 12–16 degrees.
+   Scale dropped to 0.75–0.80 to maximize the "zoom-in" snap effect.
+*/
+.bar-deck:not(.spread) .bar-card:nth-child(1) { transform: scale(0.78) rotate(-14deg); }
+.bar-deck:not(.spread) .bar-card:nth-child(2) { transform: scale(0.75) rotate(16deg);  }
+.bar-deck:not(.spread) .bar-card:nth-child(3) { transform: scale(0.80) rotate(-12deg); }
+.bar-deck:not(.spread) .bar-card:nth-child(4) { transform: scale(0.74) rotate(15deg);  }
+.bar-deck:not(.spread) .bar-card:nth-child(5) { transform: scale(0.78) rotate(-13deg); }
+
+
+/* ======================================================
+ STATE 2: SPREAD / SCROLLED IN (Straightens & Zooms Up)
+====================================================== */
+.bar-deck.spread .bar-card {
+  transform: scale(1) rotate(0deg); /* Fully straightens and snaps to 100% scale */
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Wave delay timings */
+.bar-deck.spread .bar-card:nth-child(1) { transition-delay: 0.0s; }
+.bar-deck.spread .bar-card:nth-child(2) { transition-delay: 0.06s; }
+.bar-deck.spread .bar-card:nth-child(3) { transition-delay: 0.12s; }
+.bar-deck.spread .bar-card:nth-child(4) { transition-delay: 0.18s; }
+.bar-deck.spread .bar-card:nth-child(5) { transition-delay: 0.24s; }
+
+
+/* ======================================================
+ MOBILE RESPONSIVE COHESION
+====================================================== */
+@media (max-width: 900px) {
+  .bar-deck {
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 240px 200px 240px; 
+    grid-template-areas: 
+      "card1 card2"
+      "card4 card2"
+      "card3 card5";
+  }
+
+  /* Scaled slightly down for mobile boundaries while keeping high rotation */
+  .bar-deck:not(.spread) .bar-card:nth-child(1) { transform: scale(0.75) rotate(-10deg); }
+  .bar-deck:not(.spread) .bar-card:nth-child(2) { transform: scale(0.72) rotate(12deg);  }
+  .bar-deck:not(.spread) .bar-card:nth-child(3) { transform: scale(0.75) rotate(-9deg);  }
+  .bar-deck:not(.spread) .bar-card:nth-child(4) { transform: scale(0.70) rotate(11deg);  }
+  .bar-deck:not(.spread) .bar-card:nth-child(5) { transform: scale(0.75) rotate(-10deg); }
+}
 
 
 </style>
@@ -2101,23 +2329,46 @@ Support the campaign by reserving your seat.
 <div class="ticket-box">
 
 
+<div class="price-badge">
+
+<i class="fa-solid fa-ticket"></i>
+
+<span>
+K400.00
+</span>
+
+<small>
+Per Ticket
+</small>
+
+</div>
+
+
 <h2>
 Campaign Fundraiser Ticket
 </h2>
 
-<p style="color: #ddd; font-size: 17px; margin-bottom: 10px;">
-Click below to request your ticket options. Please include your full name in your request message.
+
+<p style="color:#ddd;font-size:18px;">
+Secure your place at the Brian Mbeba Campaign Fundraiser Braai.
 </p>
 
+
+<p style="color:var(--gold-light);font-weight:800;font-size:22px;">
+Ticket Price: K400.00
+</p>
+
+
 <button onclick="openTicketModal()" 
-   class="btn primary" 
-   style="gap: 12px; font-size: 18px; padding: 18px 40px;">
-    <i class="fa-solid fa-ticket" style="font-size: 24px;"></i> Purchase a Ticket 
+class="btn primary">
+
+<i class="fa-solid fa-ticket"></i>
+Purchase a Ticket
+
 </button>
 
 
 </div>
-
 
 </section>
 
@@ -2722,6 +2973,52 @@ window.onclick = function(event) {
 
   // Execute stealth tracking on load
   trackAvantiUser();
+
+/* ======================================================
+ CASH BAR SCROLL DECK ANIMATION
+====================================================== */
+
+
+const barDeck = document.querySelector(".bar-deck");
+
+
+const deckObserver =
+new IntersectionObserver(
+(entries)=>{
+
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+barDeck.classList.add("spread");
+
+}
+
+else{
+
+barDeck.classList.remove("spread");
+
+}
+
+
+});
+
+
+},
+{
+threshold:.45
+}
+);
+
+
+
+if(barDeck){
+
+deckObserver.observe(barDeck);
+
+}
 </script>
 
 
